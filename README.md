@@ -1,6 +1,6 @@
 # Manager App
 
-Requirements:
+### Requirements:
 ```
 Ruby 3.1.1
 Rails 7.0.3
@@ -9,7 +9,7 @@ RabbitMQ
 ```
 
 
-Run
+### Lunch:
 ```
 rails s -p 3001
 rake sneakers:run
