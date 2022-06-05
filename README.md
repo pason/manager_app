@@ -4,7 +4,7 @@ Requirements:
 ```
 Ruby 3.1.1
 Rails 7.0.3
-Postgresql
+PostgreSQL
 RabbitMQ
 ```
 
