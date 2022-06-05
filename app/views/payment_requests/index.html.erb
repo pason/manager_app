@@ -1,0 +1,18 @@
+<p style="color: green"><%= notice %></p>
+
+<h2>Payment requests</h2>
+
+<table id="payment_requests">
+  <tr>
+    <th>Amount</th>
+    <th>Description</th>
+    <th>Requested At</th>
+    <th>Status</th>
+  </tr>
+
+  <% @payment_requests.each do |payment_request| %>
+    <%= render partial: 'payment_request', locals: { payment_request: payment_request } %>
+  <% end %>
+</table>
+
+
