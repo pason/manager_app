@@ -12,6 +12,5 @@ RSpec.describe 'payment_requests/index', type: :view do
     render
     assert_select 'tr>td', text: '$9.99'.to_s, count: 2
     assert_select 'tr>td', text: 'payment request'.to_s, count: 2
-    assert_select 'tr>td', text: 'pending'.to_s, count: 2
   end
 end

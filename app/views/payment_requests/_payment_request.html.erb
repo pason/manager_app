@@ -11,7 +11,12 @@
   </td>
   <td>
     <i>
-      <%= payment_request.status %>
+      <% if payment_request.pending? %>
+        <%= button_to "Accept", payment_request_accept_path(payment_request), form: {style: 'display:inline-block;'} %>
+        <%= button_to "Reject", payment_request_reject_path(payment_request), form: {style: 'display:inline-block;'} %>
+      <% else %>
+        <%= payment_request.status %>
+      <% end %>
     </i>
   </td>
 </tr>

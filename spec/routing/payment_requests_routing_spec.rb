@@ -6,12 +6,12 @@ RSpec.describe PaymentRequestsController, type: :routing do
       expect(get: '/payment_requests').to route_to('payment_requests#index')
     end
 
-    it 'routes to #new' do
-      expect(get: '/payment_requests/new').to route_to('payment_requests#new')
+    it 'routes to #accept' do
+      expect(post: '/payment_requests/abc/accept').to route_to('payment_requests#accept', payment_request_id: 'abc')
     end
 
-    it 'routes to #create' do
-      expect(post: '/payment_requests').to route_to('payment_requests#create')
+    it 'routes to #reject' do
+      expect(post: '/payment_requests/abc/reject').to route_to('payment_requests#reject', payment_request_id: 'abc')
     end
   end
 end

@@ -1,4 +1,6 @@
 <p style="color: green"><%= notice %></p>
+<p style="color: red"><%= alert %></p>
+
 
 <h2>Payment requests</h2>
 
@@ -7,7 +9,7 @@
     <th>Amount</th>
     <th>Description</th>
     <th>Requested At</th>
-    <th>Status</th>
+    <th>Action</th>
   </tr>
 
   <% @payment_requests.each do |payment_request| %>

@@ -1,19 +1,37 @@
 class PaymentRequestsController < ApplicationController
-  before_action :set_payment_request_form, only: %i[new create]
+  before_action :set_payment_request_record, only: %i[accept reject]
 
   def index
     @payment_requests = PaymentRequestRecord.all
   end
 
-  private
-
-  def payment_request_params
-    params.require(:payment_request_form).permit(:amount, :currency_code, :description)
+  def accept
+    @event = Events::PaymentRequest::Accepted.new
+    @service = PaymentRequest::AcceptService.new(payment_request_record: @payment_request_record,
+                                                 event: @event)
+    if @service.perform.success?
+      @event.publish
+      redirect_to payment_requests_url, notice: 'Payment request was successfully accepted.'
+    else
+      redirect_to payment_requests_url, alert: 'Something went wrong. Please try again later.'
+    end
   end
 
-  def set_payment_request_form
-    @payment_request_record = PaymentRequestRecord.new
-    @event = Events::PaymentRequest::Created.new
-    @payment_request_form = PaymentRequestForm.new(payment_request_record: @payment_request_record, event: @event)
+  def reject
+    @event = Events::PaymentRequest::Rejected.new
+    @service = PaymentRequest::RejectService.new(payment_request_record: @payment_request_record,
+                                                 event: @event)
+    if @service.perform.success?
+      @event.publish
+      redirect_to payment_requests_url, notice: 'Payment request was successfully rejected.'
+    else
+      redirect_to payment_requests_url, alert: 'Something went wrong. Please try again later.'
+    end
+  end
+
+  private
+
+  def set_payment_request_record
+    @payment_request_record = PaymentRequestRecord.find(params[:payment_request_id])
   end
 end
