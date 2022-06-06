@@ -2,7 +2,7 @@ class PaymentRequestsController < ApplicationController
   before_action :set_payment_request_record, only: %i[accept reject]
 
   def index
-    @payment_requests = PaymentRequestRecord.all
+    @payment_requests = PaymentRequestRecord.all.order(:created_at)
   end
 
   def accept

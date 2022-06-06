@@ -1,5 +1,7 @@
 <p style="color: green"><%= notice %></p>
-<p style="color: red"><%= alert %></p>
+<% if alert %>
+  <p style="color: red"><%= alert %></p>
+<% end %>
 
 
 <h2>Payment requests</h2>
